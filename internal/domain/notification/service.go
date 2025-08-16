@@ -1,8 +1,17 @@
 package notification
 
+import "context"
+
 type Service struct {
+	repo *Repository
 }
 
-func (s Service) NewService() {
+func NewService(repo *Repository) *Service {
+	return &Service{
+		repo: repo,
+	}
+}
 
+func (s *Service) GetAll(ctx context.Context) ([]Notification, error) {
+	return s.repo.GetAll(ctx)
 }
