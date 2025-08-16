@@ -1,4 +1,5 @@
-minha-api/
+```shell
+# Estrutura 
 │
 ├── cmd/
 │   └── api/
@@ -30,7 +31,7 @@ minha-api/
 ├── go.mod
 ├── go.sum
 └── README.md
-
+```
 
 cmd/api/main.go — lançamento explícito da aplicação. Evita lógica escondida no init.
 
