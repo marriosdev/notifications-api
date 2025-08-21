@@ -23,3 +23,12 @@ func (h *Handler) GetAllNotifications(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, notifications)
 }
+
+func (h *Handler) GetById(c *gin.Context) {
+	notification, err := h.service.repo.GetById(c, c.Param("id"))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, notification)
+}

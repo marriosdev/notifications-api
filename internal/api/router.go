@@ -15,4 +15,5 @@ func RegisterRouter(r *gin.Engine) {
 
 func setupNotificationRoutes(r *gin.Engine, handler *notification.Handler) {
 	r.GET("/notifications", handler.GetAllNotifications)
+	r.GET("/notifications/:id", handler.GetById)
 }
