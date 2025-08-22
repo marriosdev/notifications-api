@@ -1,6 +1,7 @@
 package notification
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -31,4 +32,19 @@ func (h *Handler) GetById(c *gin.Context) {
 		return
 	}
 	c.JSON(http.StatusOK, notification)
+}
+
+func (h *Handler) SaveNotification(c *gin.Context) {
+	var notification Notification
+
+	if err := c.ShouldBindJSON(&notification); err != nil {
+		c.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+	n, err := h.service.SaveNotification(c, notification)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+	c.JSON(http.StatusOK, n)
 }

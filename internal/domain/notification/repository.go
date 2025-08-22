@@ -2,6 +2,7 @@ package notification
 
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -48,5 +49,16 @@ func (r Repository) GetById(ctx context.Context, id string) (Notification, error
 	if err := cur.Err(); err != nil {
 		log.Fatal(err)
 	}
+	return notification, nil
+}
+
+func (r Repository) Save(ctx context.Context, notification Notification) (Notification, error) {
+	collection := r.mongoDb.Collection("notifications")
+	fmt.Println(notification)
+	result, err := collection.InsertOne(ctx, notification)
+	if err != nil {
+		log.Fatal(err)
+	}
+	fmt.Println(result)
 	return notification, nil
 }
