@@ -16,7 +16,7 @@ type mongoConfig struct {
 
 func newMongoConfig() mongoConfig {
 	return mongoConfig{
-		URI:      os.Getenv("mongodb://localhost:27017/"),
+		URI:      os.Getenv("MONGO_DB_URI"),
 		Database: "membrou",
 	}
 }
