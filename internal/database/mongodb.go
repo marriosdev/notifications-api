@@ -2,6 +2,7 @@ package database
 
 import (
 	"context"
+	"os"
 	"time"
 
 	"go.mongodb.org/mongo-driver/mongo"
@@ -15,7 +16,7 @@ type mongoConfig struct {
 
 func newMongoConfig() mongoConfig {
 	return mongoConfig{
-		URI:      "mongodb://localhost:27017/",
+		URI:      os.Getenv("mongodb://localhost:27017/"),
 		Database: "membrou",
 	}
 }
