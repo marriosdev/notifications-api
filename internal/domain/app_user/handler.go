@@ -17,7 +17,7 @@ var fakeUser = AppUser{
 	Password: "$2a$10$0H00C5oGk8qRupW5lR8zjO2v8XqT5L4lE03bW3xG1mR2zG0lI2o1u",
 }
 
-func loginHandler(c *gin.Context) {
+func (h *Handler) Login(c *gin.Context) {
 	var dto loginDTO
 	if err := c.ShouldBindJSON(&dto); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": "payload inválido"})
@@ -41,7 +41,7 @@ func loginHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"access_token": token})
 }
 
-func meHandler(c *gin.Context) {
+func (h *Handler) Me(c *gin.Context) {
 	claims := c.MustGet("claims").(*auth.CustomClaims)
 	c.JSON(http.StatusOK, gin.H{
 		"user_id":  claims.UserID,
